@@ -1,0 +1,8 @@
+<div class="example-menu" cdkMenu>
+  <button *ngFor="let item of menuItems; let i = index"
+          class="example-menu-item"
+          (click)="goToTab(i+1)"
+          cdkMenuItem>
+    Tab {{i+1}}
+  </button>
+</div>

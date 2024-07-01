@@ -1,0 +1,9 @@
+<div class="layout-container"
+     [style]="'background: '+selectedGenderColor">
+  <app-side-bar (generateTab)="focusOnTab($event)"></app-side-bar>
+  <mat-tab-group [(selectedIndex)]="selectedTabIndex" dir="rtl">
+    <mat-tab *ngFor="let tab of menuItems; let i = index" label="Tab {{i+1}}"></mat-tab>
+  </mat-tab-group>
+  <button mat-flat-button (click)="refresh()">رفرش</button>
+  <router-outlet *ngIf="!selectedTabIndex" />
+</div>

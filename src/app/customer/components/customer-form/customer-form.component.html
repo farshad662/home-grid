@@ -1,0 +1,52 @@
+<form [formGroup]="customerForm" (ngSubmit)="customerFormSubmit()">
+  <mat-form-field>
+    <mat-label>نام</mat-label>
+    <input matInput
+           formControlName="firstName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>نام خانوادگی</mat-label>
+    <input matInput
+           formControlName="lastName">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>جنسیت</mat-label>
+    <mat-select formControlName="gender">
+      <mat-option value="مرد">مرد</mat-option>
+      <mat-option value="زن">زن</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="mt-3 mb-1">
+    <mat-label>تاریخ تولد</mat-label>
+    <input matInput tabindex="-1" formControlName="birthDate" [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>کد ملی</mat-label>
+    <input matInput
+           formControlName="nationalCode">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>موبایل</mat-label>
+    <input matInput
+           formControlName="mobile">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>کارگزاری</mat-label>
+    <input matInput
+           formControlName="company">
+  </mat-form-field>
+
+  <div class="btn-wrapper">
+    <button mat-flat-button type="button" (click)="closeDialog()">Close</button>
+    <button mat-flat-button class="save-btn" [disabled]="customerForm.invalid">Save</button>
+  </div>
+
+</form>

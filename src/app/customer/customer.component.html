@@ -1,0 +1,63 @@
+<section class="customer-table">
+  <button mat-flat-button (click)="openFormDialog()">افزودن مشتری</button>
+  <section class="grid-container mat-elevation-z3">
+    <mat-table dir="rtl" [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell *matCellDef="let i = index">{{i+1}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>نام</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row?.firstName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>نام خانوادگی</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row?.lastName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="gender">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>جنسیت</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row?.gender}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="birthDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ تولد</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row?.birthDate | date}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nationalCode">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>کد ملی</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row?.nationalCode}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="mobile">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>موبایل</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row?.mobile}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="company">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>کارگزاری</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row?.company}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="opr">
+        <mat-header-cell *matHeaderCellDef>عملیات</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-icon (click)="deleteRow(row)">delete</mat-icon>
+          <mat-icon (click)="openFormDialog(row)">edit</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row [style]="'display: '+(loading ? 'none' : 'flex')" *matRowDef="let row; columns: displayedColumns;" (dblclick)="changeParentColor(row.gender)"></mat-row>
+    </mat-table>
+    <mat-spinner *ngIf="loading" [diameter]="70" style="margin: 10px auto"></mat-spinner>
+    <mat-paginator showFirstLastButtons
+                   #paginator
+                   [length]="numOfRows"
+                   [pageSizeOptions]="[10, 15, 25, 50]"
+                   (page)="setPagination($event)"></mat-paginator>
+  </section>
+</section>
