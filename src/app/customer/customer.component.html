@@ -14,12 +14,22 @@
       </ng-container>
 
       <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef  mat-sort-header>نام</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>
+          <div>
+            <div>نام</div>
+            <input style="width: 100%" #fName (keyup)="filterGrid('firstName', fName.value)" matInput>
+          </div>
+        </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row?.firstName}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef  mat-sort-header>نام خانوادگی</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef  mat-sort-header>
+          <div>
+            <div>نام خانوادگی</div>
+            <input style="width: 100%" #lName (keyup)="filterGrid('lastName', lName.value)" matInput>
+          </div>
+        </mat-header-cell>
         <mat-cell *matCellDef="let row">{{row?.lastName}}</mat-cell>
       </ng-container>
 

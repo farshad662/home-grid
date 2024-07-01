@@ -8,6 +8,7 @@ import {DataService} from "./services/data.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {GeneralServiceService} from "../shared/services/general-service.service";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-customer',
@@ -105,5 +106,10 @@ export class CustomerComponent implements AfterViewInit{
     } else {
       this.selectedItem = [];
     }
+  }
+
+  filterGrid(fieldName, value) {
+    let list = this.dataService.getCustomers().filter(c => c[fieldName].includes(value));
+    this.dataSource = new MatTableDataSource(list);
   }
 }
