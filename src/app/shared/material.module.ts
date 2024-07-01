@@ -13,6 +13,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSortModule} from "@angular/material/sort";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {MatCheckbox} from "@angular/material/checkbox";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatAutocomplete, MatAutocompleteTrigger} from "@angular/material/autocomplete";
 
 const MODULES = [
   CdkMenuModule,
@@ -28,7 +31,11 @@ const MODULES = [
   MatNativeDateModule,
   MatIconModule,
   MatSortModule,
-  MatProgressSpinner
+  MatProgressSpinner,
+  MatCheckbox,
+  MatChipsModule,
+  MatAutocompleteTrigger,
+  MatAutocomplete
 ];
 
 @NgModule({

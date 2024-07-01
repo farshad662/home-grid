@@ -30,6 +30,10 @@ export class DataService {
     localStorage.setItem('customerList', JSON.stringify(this.getCustomers().filter(c => c.id !== id)));
   }
 
+  deleteCustomerList(ids: number[]) {
+    localStorage.setItem('customerList', JSON.stringify(this.getCustomers().filter(c => !ids.includes(c.id))));
+  }
+
   editCustomer(customer: Customer) {
     const list = this.getCustomers();
     let index = list.indexOf(list.find(c => c.id === customer.id));

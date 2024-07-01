@@ -18,6 +18,7 @@ export class CustomerComponent implements AfterViewInit{
   dataSource: MatTableDataSource<Customer>;
   numOfRows: number;
   loading: boolean;
+  selectedItem: number[] = [];
   orderPaging: Paging = new Paging(1, 10);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -44,7 +45,7 @@ export class CustomerComponent implements AfterViewInit{
     this.dataSource = new MatTableDataSource(list);
     setTimeout(() => {
       this.loading = false;
-    },2000);
+    },1000);
   }
 
   setPagination(e) {
@@ -76,5 +77,33 @@ export class CustomerComponent implements AfterViewInit{
 
   changeParentColor(gender) {
     this.generalService.clickedGender.next(gender);
+  }
+
+  selectItem(checked, id) {
+    if (checked) {
+      this.selectedItem.push(id);
+    } else {
+      const index = this.selectedItem.indexOf(id);
+      if (index > -1) {
+        this.selectedItem.splice(index, 1)
+      }
+    }
+  }
+
+  deleteSelected() {
+    this.dataService.deleteCustomerList(this.selectedItem)
+    this.selectedItem = [];
+    this.getCustomersList();
+  }
+
+  selectAll(checked: boolean) {
+    if (checked) {
+      let list = this.dataService.getCustomers();
+      list.forEach(c => {
+        this.selectedItem.push(c.id);
+      });
+    } else {
+      this.selectedItem = [];
+    }
   }
 }

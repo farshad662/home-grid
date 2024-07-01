@@ -1,10 +1,16 @@
 <section class="customer-table">
-  <button mat-flat-button (click)="openFormDialog()">افزودن مشتری</button>
+  <div style="display: flex; justify-content: space-between">
+    <button mat-flat-button (click)="openFormDialog()">افزودن مشتری</button>
+    <button mat-flat-button [disabled]="!selectedItem.length" (click)="deleteSelected()">پاک کردن انتخاب شده ها</button>
+  </div>
   <section class="grid-container mat-elevation-z3">
     <mat-table dir="rtl" [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
-        <mat-cell *matCellDef="let i = index">{{i+1}}</mat-cell>
+        <mat-header-cell *matHeaderCellDef><mat-checkbox (change)="selectAll($event.checked)"></mat-checkbox> #</mat-header-cell>
+        <mat-cell *matCellDef="let row, let i = index">
+          <mat-checkbox (change)="selectItem($event.checked, row.id)" [checked]="selectedItem.includes(row.id)"></mat-checkbox>
+          {{i+1}}
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="firstName">
