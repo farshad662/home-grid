@@ -7,6 +7,7 @@ import {BehaviorSubject, Subject} from "rxjs";
 export class GeneralServiceService {
   clickedGender: BehaviorSubject<string> = new BehaviorSubject<string>(null);
   refreshClocked = new Subject();
+  companyList = ['مفید', 'مضر', 'بی ضرر', 'ضرر دار', 'خطر دار'];
 
   constructor() { }
 }

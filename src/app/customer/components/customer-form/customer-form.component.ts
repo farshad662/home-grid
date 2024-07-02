@@ -6,6 +6,7 @@ import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {MatChipInputEvent} from "@angular/material/chips";
 import {MatAutocompleteSelectedEvent} from "@angular/material/autocomplete";
 import {map, Observable, startWith} from "rxjs";
+import {GeneralServiceService} from "../../../shared/services/general-service.service";
 
 export function isValidNationalCode (field) {
   let code = field.value;
@@ -31,7 +32,7 @@ export function isValidNationalCode (field) {
 export class CustomerFormComponent {
   @ViewChild('companyInput') companyInput: ElementRef<HTMLInputElement>;
   customerForm: UntypedFormGroup;
-  companyList = ['مفید', 'مضر', 'بی ضرر', 'ضرر دار', 'خطر دار'];
+  companyList = this.generalService.companyList;
   selectedCompanyList = [];
   announcer = inject(LiveAnnouncer);
   filteredCompanies: Observable<string[]>;
@@ -40,6 +41,7 @@ export class CustomerFormComponent {
 
   constructor(private fb: UntypedFormBuilder,
               public dialogRef: MatDialogRef<CustomerFormComponent>,
+              private generalService: GeneralServiceService,
               @Inject(MAT_DIALOG_DATA) public data: any,) {
     this.customerForm = fb.group({
       id: [''],

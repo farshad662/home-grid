@@ -49,22 +49,48 @@
         </ng-container>
 
         <ng-container matColumnDef="birthDate">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ تولد</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>
+              <div>تاریخ تولد</div>
+              <input matInput tabindex="-1" style="width: 100%" formControlName="birthDate" [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker" style="position: absolute;top: 10px;left: 0"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row?.birthDate | jalaliDate}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="nationalCode">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>کد ملی</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>
+              <div>کد ملی</div>
+              <input style="width: 100%" formControlName="nationalCode">
+            </div>
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row?.nationalCode}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="mobile">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>موبایل</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>
+              <div>موبایل</div>
+              <input style="width: 100%" formControlName="mobile">
+            </div>
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row?.mobile}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="company">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>کارگزاری</mat-header-cell>
+          <mat-header-cell style="min-width: 200px" *matHeaderCellDef mat-sort-header>
+            <div>
+              <div>کارگزاری</div>
+              <mat-form-field style="width: 150px; height: 60px">
+                <mat-select formControlName="company" multiple>
+                  <mat-option *ngFor="let company of companyList" [value]="company">{{company}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row?.company}}</mat-cell>
         </ng-container>
       </form>

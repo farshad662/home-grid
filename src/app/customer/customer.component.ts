@@ -24,7 +24,9 @@ export class CustomerComponent implements AfterViewInit{
   orderPaging: Paging = new Paging(1, 10);
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  companyList = this.generalService.companyList;
   displayedColumns = ['id', 'firstName', 'lastName', 'gender', 'birthDate', 'nationalCode', 'mobile', 'company', 'opr'];
+  private customersList = this.dataService.getCustomers();
 
   constructor(private dialog: MatDialog,
               private generalService: GeneralServiceService,
@@ -35,12 +37,22 @@ export class CustomerComponent implements AfterViewInit{
     });
     this.getCustomersList();
     this.filterForm = fb.group({
-      firstName: [''],
-      lastName: [''],
-      gender: ['']
+      firstName: [null],
+      lastName: [null],
+      gender: [null],
+      birthDate: [null],
+      nationalCode: [null],
+      mobile: [null],
+      company: [null]
     });
     this.filterForm.valueChanges.subscribe(res => {
-      debugger
+      let filteredList = this.dataService.getCustomers();
+      Object.keys(res).forEach(key => {
+        if (res[key] || res[key] !== null) {
+          filteredList = filteredList.filter(c => c[key].includes(res[key]));
+        }
+      });
+      this.dataSource = new MatTableDataSource(filteredList);
     });
   }
 
@@ -116,10 +128,5 @@ export class CustomerComponent implements AfterViewInit{
     } else {
       this.selectedItem = [];
     }
-  }
-
-  filterGrid(fieldName, value) {
-    let list = this.dataService.getCustomers().filter(c => c[fieldName].includes(value));
-    this.dataSource = new MatTableDataSource(list);
   }
 }
