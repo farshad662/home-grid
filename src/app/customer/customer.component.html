@@ -13,50 +13,61 @@
         </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef  mat-sort-header>
-          <div>
-            <div>نام</div>
-            <input style="width: 100%" #fName (keyup)="filterGrid('firstName', fName.value)" matInput>
-          </div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row?.firstName}}</mat-cell>
-      </ng-container>
+      <form [formGroup]="filterForm">
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>
+            <div>
+              <div>نام</div>
+              <input style="width: 100%" formControlName="firstName">
+            </div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row?.firstName}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef  mat-sort-header>
-          <div>
-            <div>نام خانوادگی</div>
-            <input style="width: 100%" #lName (keyup)="filterGrid('lastName', lName.value)" matInput>
-          </div>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row?.lastName}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef  mat-sort-header>
+            <div>
+              <div>نام خانوادگی</div>
+              <input style="width: 100%" formControlName="lastName">
+            </div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row?.lastName}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="gender">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>جنسیت</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row?.gender}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="gender">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>
+              <div>جنسیت</div>
+              <select style="width: 100%" formControlName="gender">
+                <option></option>
+                <option value="مرد">مرد</option>
+                <option value="زن">زن</option>
+              </select>
+            </div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row?.gender}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="birthDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ تولد</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row?.birthDate | date}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="birthDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ تولد</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row?.birthDate | date}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="nationalCode">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>کد ملی</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row?.nationalCode}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="nationalCode">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>کد ملی</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row?.nationalCode}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="mobile">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>موبایل</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row?.mobile}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="mobile">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>موبایل</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row?.mobile}}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="company">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>کارگزاری</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{row?.company}}</mat-cell>
-      </ng-container>
+        <ng-container matColumnDef="company">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>کارگزاری</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row?.company}}</mat-cell>
+        </ng-container>
+      </form>
 
       <ng-container matColumnDef="opr">
         <mat-header-cell *matHeaderCellDef>عملیات</mat-header-cell>

@@ -3,12 +3,12 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Customer} from "./models/customer";
 import {Paging} from "./models/paging";
 import {MatDialog} from "@angular/material/dialog";
-import {CustomerFormComponent} from "./components/customer-form/customer-form.component";
+import {CustomerFormComponent, isValidNationalCode} from "./components/customer-form/customer-form.component";
 import {DataService} from "./services/data.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {GeneralServiceService} from "../shared/services/general-service.service";
-import {filter} from "rxjs";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-customer',
@@ -17,6 +17,7 @@ import {filter} from "rxjs";
 })
 export class CustomerComponent implements AfterViewInit{
   dataSource: MatTableDataSource<Customer>;
+  filterForm: UntypedFormGroup;
   numOfRows: number;
   loading: boolean;
   selectedItem: number[] = [];
@@ -27,11 +28,20 @@ export class CustomerComponent implements AfterViewInit{
 
   constructor(private dialog: MatDialog,
               private generalService: GeneralServiceService,
+              private fb: UntypedFormBuilder,
               private dataService: DataService) {
     generalService.refreshClocked.subscribe(res => {
       this.getCustomersList();
     });
     this.getCustomersList();
+    this.filterForm = fb.group({
+      firstName: [''],
+      lastName: [''],
+      gender: ['']
+    });
+    this.filterForm.valueChanges.subscribe(res => {
+      debugger
+    });
   }
 
   ngAfterViewInit() {
