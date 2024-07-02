@@ -50,7 +50,7 @@
 
         <ng-container matColumnDef="birthDate">
           <mat-header-cell *matHeaderCellDef mat-sort-header>تاریخ تولد</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row?.birthDate | date}}</mat-cell>
+          <mat-cell *matCellDef="let row">{{row?.birthDate | jalaliDate}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="nationalCode">
