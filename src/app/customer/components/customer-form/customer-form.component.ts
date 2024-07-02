@@ -74,9 +74,9 @@ export class CustomerFormComponent {
   }
 
   remove(company: string): void {
-    const index = this.companyList.indexOf(company);
+    const index = this.selectedCompanyList.indexOf(company);
     if (index >= 0) {
-      this.companyList.splice(index, 1);
+      this.selectedCompanyList.splice(index, 1);
       this.announcer.announce(`Removed ${company}`);
     }
   }
