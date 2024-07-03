@@ -81,14 +81,13 @@
         </ng-container>
 
         <ng-container matColumnDef="company">
-          <mat-header-cell style="min-width: 200px" *matHeaderCellDef mat-sort-header>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
             <div>
               <div>کارگزاری</div>
-              <mat-form-field style="width: 150px; height: 60px">
-                <mat-select formControlName="company" multiple>
-                  <mat-option *ngFor="let company of companyList" [value]="company">{{company}}</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <select style="width: 100%" formControlName="company">
+                <option></option>
+                <option *ngFor="let company of companyList" [value]="company">{{company}}</option>
+              </select>
             </div>
           </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row?.company}}</mat-cell>
