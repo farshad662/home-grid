@@ -49,7 +49,11 @@ export class CustomerComponent implements AfterViewInit{
       let filteredList = this.dataService.getCustomers();
       Object.keys(res).forEach(key => {
         if (res[key] || res[key] !== null) {
-          filteredList = filteredList.filter(c => c[key].includes(res[key]));
+          if (key === 'birthDate') {
+            filteredList = filteredList.filter(c => c[key].includes(res[key].toISOString()));
+          } else {
+            filteredList = filteredList.filter(c => c[key].includes(res[key]));
+          }
         }
       });
       this.dataSource = new MatTableDataSource(filteredList);
